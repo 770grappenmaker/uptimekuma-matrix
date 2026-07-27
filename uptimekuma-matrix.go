@@ -13,6 +13,7 @@ import (
 
 	"maunium.net/go/mautrix"
 	"maunium.net/go/mautrix/event"
+	"maunium.net/go/mautrix/format"
 	"maunium.net/go/mautrix/id"
 )
 
@@ -154,10 +155,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	var messageBody string
 	messageBody, err = doTemplate(*messageTemplate, payload)
 
-	_, err = client.SendMessageEvent(context.Background(), id.RoomID(*matrixRoom), event.EventMessage, &event.MessageEventContent{
-		MsgType: event.MessageType(*messageType),
-		Body:    messageBody,
-	})
+	content := format.RenderMarkdown(messageBody, true, true)
+	content.MsgType = event.MessageType(*messageType)
+	_, err = client.SendMessageEvent(context.Background(), id.RoomID(*matrixRoom), event.EventMessage, content)
 
 	if err != nil {
 		http.Error(w, fmt.Sprintf("Failed to deliver message to homeserver: %s", err), http.StatusBadGateway)

@@ -1,12 +1,16 @@
 # uptimekuma-matrix
 Very simple [UptimeKuma](https://github.com/louislam/uptime-kuma) webhook receiver for [Matrix](https://matrix.org) written in Go.
-Has more features than plain UptimeKuma. Supports custom templates, m.notice
+Has more features than plain UptimeKuma:
+- Custom templates
+- Markdown support
+- Can switch `m.text`/`m.notice`
 Very easy to configure.
 
 ## Running
 Get a binary, `go build` or whatever, figure it out, you seem like a smart guy.  
 Usage:
 ```
+uptimekuma-matrix [-help] [-addr string] [-port int]
   -addr string
         the address to bind to (default "0.0.0.0")
   -help
