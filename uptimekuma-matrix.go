@@ -37,6 +37,8 @@ type Monitor struct {
 	Description string `json:"description"`
 	PathName    string `json:"pathName"`
 	URL         string `json:"url"`
+	Hostname    string `json:"hostname"`
+	Port        string `json:"port"`
 }
 
 type HeartbeatEvent struct {
