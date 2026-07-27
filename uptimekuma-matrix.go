@@ -146,6 +146,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var messageBody string
+	messageBody, err = doTemplate(*messageTemplate, payload)
+
+	if err != nil {
+		http.Error(w, fmt.Sprintf("Templating failed: %s", err), http.StatusBadRequest)
+		return
+	}
+
 	var client *mautrix.Client
 	client, err = mautrix.NewClient(*csapi, id.UserID(*matrixID), *matrixToken)
 
@@ -153,9 +161,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed to reach homeserver", http.StatusBadGateway)
 		return
 	}
-
-	var messageBody string
-	messageBody, err = doTemplate(*messageTemplate, payload)
 
 	content := format.RenderMarkdown(messageBody, true, true)
 	content.MsgType = event.MessageType(*messageType)
