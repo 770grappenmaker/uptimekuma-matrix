@@ -1,6 +1,8 @@
 module koenoostveen/uptimekuma-matrix
 
-go 1.26.5
+go 1.26
+
+require maunium.net/go/mautrix v0.29.0
 
 require (
 	filippo.io/edwards25519 v1.2.0 // indirect
@@ -18,5 +20,4 @@ require (
 	golang.org/x/net v0.57.0 // indirect
 	golang.org/x/sys v0.47.0 // indirect
 	golang.org/x/text v0.40.0 // indirect
-	maunium.net/go/mautrix v0.29.0 // indirect
 )
