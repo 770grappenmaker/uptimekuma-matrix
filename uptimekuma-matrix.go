@@ -18,17 +18,17 @@ import (
 )
 
 type Heartbeat struct {
-	MonitorID      int    `json:"monitorID"`
-	Status         int    `json:"status"`
-	Time           string `json:"time"`
-	Msg            string `json:"msg"`
-	Ping           int    `json:"ping"`
-	Important      bool   `json:"important"`
-	Retries        int    `json:"retries"`
-	Timezone       string `json:"timezone"`
-	TimezoneOffset string `json:"timezoneOffset"`
-	LocalDateTime  string `json:"localDateTime"`
-	LastDownTime   string `json:"lastDownTime"`
+	MonitorID      int     `json:"monitorID"`
+	Status         int     `json:"status"`
+	Time           string  `json:"time"`
+	Msg            string  `json:"msg"`
+	Ping           float64 `json:"ping"`
+	Important      bool    `json:"important"`
+	Retries        int     `json:"retries"`
+	Timezone       string  `json:"timezone"`
+	TimezoneOffset string  `json:"timezoneOffset"`
+	LocalDateTime  string  `json:"localDateTime"`
+	LastDownTime   string  `json:"lastDownTime"`
 }
 
 type Monitor struct {
@@ -142,7 +142,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	err = json.Unmarshal(body, &payload)
 
 	if err != nil {
-		http.Error(w, "Invalid Webhook body", http.StatusBadRequest)
+		http.Error(w, fmt.Sprintf("Invalid Webhook body: %s", err), http.StatusBadRequest)
 		return
 	}
 
