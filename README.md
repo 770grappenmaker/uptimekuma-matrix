@@ -4,6 +4,7 @@ Has more features than plain UptimeKuma:
 - Custom templates
 - Markdown support
 - Can switch `m.text`/`m.notice`
+
 Very easy to configure.
 
 ## Running
